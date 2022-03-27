@@ -1,9 +1,12 @@
 import Navbar from "../../components/Ui/NavBar/NavBar"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function Website() {
     return (
       <div>
-      <Navbar />
+        <Navbar />
+        <Routes>
+        </Routes>
       </div>
     )
   }
