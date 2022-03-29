@@ -1,55 +1,56 @@
 <?php
+
 namespace App\Models\Entities;
 
 class Thread
 {
-	private $id, $date_creation, $title, $status;
+    private $id, $date_creation, $title, $status;
 
-	public function setId($id)
+    public function setId($id)
     {
-		$this->id = $id;
+        $this->id = $id;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getId()
-	{
-		return $this->id;
-	}
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	public function setDateCreation($date_creation)
-	{
-		$this->date_creation = $date_creation;
+    public function setDateCreation($date_creation)
+    {
+        $this->date_creation = $date_creation;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getDateCreation()
-	{
-		return $this->date_creation;
-	}
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
 
-	public function setTitle($title)
-	{
-		$this->title = $title;
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	public function setStatus($status)
-	{
-		$this->status = $status;
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getStatus()
-	{
-		return $this->status;
-	}
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

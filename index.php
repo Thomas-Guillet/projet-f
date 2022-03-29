@@ -1,9 +1,10 @@
-<?php 
+<?php
 require 'vendor/autoload.php';
+
 use App\Utils\Router;
 
 $router = new Router();
-$router->renderPage((array_key_exists('page', $_GET)) ? $_GET['page'] : null);
+$router::renderPage((array_key_exists('page', $_GET)) ? $_GET['page'] : null);
 
 /**
  * On est dans un fichier PHP (qui commence du coup avec la balise <?php) bien que la logique voudrait que l'on ferme un fichier PHP avec la balise ?>

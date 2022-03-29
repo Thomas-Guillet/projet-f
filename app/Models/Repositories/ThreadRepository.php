@@ -1,12 +1,14 @@
 <?php
+
 namespace App\Models\Repositories;
 
 use App\Utils\Database;
 use App\Models\Entities\Thread;
 
-class ThreadRepository extends Database {
-
-    public function test(){
+class ThreadRepository extends Database
+{
+    public function test()
+    {
         $query = "SELECT * FROM thread";
         $stmt = $this->prepare($query);
         $stmt->execute();
@@ -17,7 +19,6 @@ class ThreadRepository extends Database {
         return $thread;
     }
 
-    
     public function listThreads()
     {
         $query = $this->query('SELECT * FROM `thread`');
