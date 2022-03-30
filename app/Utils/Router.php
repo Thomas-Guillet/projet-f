@@ -7,12 +7,13 @@ use Exception;
 final class Router
 {
     const ROUTES = [
+        'test' => 'ApiController::test'
     ];
     const ROUTES_ADMIN = [
         '' => 'DashboardController::render',
         'login' => 'LoginController::render',
         'threads' => 'ThreadsController::list',
-        'threads/?2' => 'ThreadsController::edit'
+        'thread/?2' => 'ThreadsController::edit'
     ];
 
     public static function renderPage($url)
@@ -25,10 +26,10 @@ final class Router
                     //Si l'url commence par /admin/, on load la partie Back Office
                     //On termine par \\ car php traduit \\ dans les string par \ (demande a toma pk, c'est trop long a expliqué pourquoi mais la raison est simple)
                     case "admin" :
-                        return call_user_func("App\Controllers\Admin\\".self::getAdminRoute($url));
+                        return call_user_func("App\Controllers\Admin\\".self::getRoute($url, self::ROUTES_ADMIN));
                     //Sinon on load le front
-                    default :
-                        return call_user_func("App\Controllers\\".self::getRoute($url));
+                    case "api" :
+                        return call_user_func("App\Controllers\Api\\".self::getRoute($url, self::ROUTES));
                 }
             }
 
@@ -43,15 +44,15 @@ final class Router
         return new Exception ("404");
     }
 
-    private static function getAdminRoute($url)
+    private static function getRoute($url, $routes)
     {
-        //On enlève le mot 'admin' de l'url car on en veut pas une fois arrivé ici
+        //On enlève le mot 'admin' ou 'api' de l'url car on en veut pas une fois arrivé ici
         unset($url[0]);
         //On part du principe qu'on ne trouvera pas de route correspondante, on passe ce paramètre à true si une route est trouvée
         $notFound = true;
         $urlLength = count($url);
 
-        foreach (self::ROUTES_ADMIN as $route => $class) {
+        foreach ($routes as $route => $class) {
             //TODO On ajoutera la vérification de Login ici
 
             //On reconstruit l'url en remplaçant les paramètres ?chiffre par la partie de l'url correspondant pour prendre en compte les url dynamique
@@ -60,29 +61,6 @@ final class Router
             }
 
             //On compare l'url reconstruit avec l'url actuel et si il y a match, on sort de la boucle
-            if (implode('/', $url) === $route) {
-                $notFound = false;
-                break;
-            }
-        }
-
-        if ($notFound) {
-            throw new Exception ("404");
-        }
-
-        return $class;
-    }
-
-    private static function getRoute($url)
-    {
-        $notFound = true;
-        $urlLength = count($url);
-
-        foreach (self::ROUTES_ADMIN as $route => $class) {
-            for ($i = 0; $urlLength; $i++) {
-                $route = str_replace("?".($i + 1), $url[$i], $route);
-            }
-
             if (implode('/', $url) === $route) {
                 $notFound = false;
                 break;

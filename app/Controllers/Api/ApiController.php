@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Api;
 
 use App\Models\Repositories\Api\ThreadApiRepository;
 
-class APIController
+class ApiController
 {
     private $threadRepository;
 
@@ -22,6 +22,7 @@ class APIController
 
     function test()
     {
-        dd($this->threadRepository->listThreads());
-    }
+        $threadRepository = new ThreadApiRepository();
+        echo $threadRepository->listThreads();
+        }
 }
